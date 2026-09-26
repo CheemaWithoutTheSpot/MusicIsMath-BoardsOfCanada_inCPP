@@ -60,7 +60,10 @@ int main()
 		int start_audio = wav.tellp();
 		int prec = 1000;
 
-
+		int a4 = 0;
+		int g3 = 0;
+		int g2 = 0;
+		int d2 = 0;
 
 		for (int i = 0; i < sample_rate * duration; i++) // 882000 is the max here;
 		{
@@ -72,27 +75,32 @@ int main()
 			if ((i >= 0 && i <= 26460) || (i >= 132300 && i <= 167580) || (i >= 171990 && i <= 198400)
 				|| (i >= 198450 && i <= 211580) || (i >= 211680 && i <= 238140) || (i >= 238140 && i <= 319020)
 				|| (i >= 343980 && i <= 380670) || (i >= 383670 && i <= 410130))
-				  //1 beat == 26460
+				//1 beat == 26460
 			{
-				vale = vale + sin((2 * 3.14 * i * 440) / sample_rate);
+				vale = vale + sin((2 * 3.14 * a4 * 440) / sample_rate);
+				a4++;
 			}
+			else if (a4 > 0) a4 = 0;
 			//G3 note
 			if ((i > 26460 && i <= 86790) || (i > 92610 && i <= 119000) || (i> 119070 && i<= 145530))
 			{
-				vale = vale + sin((2 * 3.14 * i * 391.1) / sample_rate);
+				vale = vale + sin((2 * 3.14 * g3 * 391.1) / sample_rate);
 
 			}
+			else if (g3 > 0) g3 = 0;
 
 			//G2 note
 			if ((i >= 0 && i<= 88200) || (i>= 92610 && i<= 105830) || (i>= 105840 && i<= 171940) //here, either the 2nd or the first node ends too early/ starts too latee
 			|| (i>= 171990 && i<= 185220) || (i>=198450 && i<= 211660)) {
-				vale = vale + sin((2 * 3.14 * i * 391.1/2) / sample_rate);
+				vale = vale + sin((2 * 3.14 * g2 * 391.1/2) / sample_rate);
 			}
+			else if (g2 > 0) g2 = 0;
 			//D2 note
 			if ((i >= 211680 && i <= 264450) || (i >= 264600 && i <= 277730) || (i >= 277830 && i <= 357150) 
 			|| (i >= 357210 && i<= 410100) || (i >= 410130 && i <= 423360)) {
-				vale = vale + sin((2 * 3.14 * i * 293.66 / 2) / sample_rate);
+				vale = vale + sin((2 * 3.14 * d2 * 293.66 / 2) / sample_rate);
 			}
+			else if (d2> 0) d2 = 0;
 			
 
 
