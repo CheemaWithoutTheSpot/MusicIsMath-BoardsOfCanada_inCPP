@@ -3,7 +3,7 @@
 #include<cmath>
 
 using namespace std;
-
+//header stuff
 //Riff
 
 const string chunk_id = "RIFF";
